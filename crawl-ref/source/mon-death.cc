@@ -2355,14 +2355,8 @@ item_def* monster_die(monster& mons, killer_type killer,
     bool corpse_consumed = false;
     if (!was_banished && !mons_reset)
     {
-<<<<<<< HEAD
         if (mons.has_ench(ENCH_INFESTATION))
             _infestation_create_scarab(&mons);
-=======
-        const bool in_los = you.see_cell(mons.pos());
-        const bool wretch = mons.props.exists(KIKU_WRETCH_KEY);
-        const bool corpseworthy = gives_player_xp || wretch;
->>>>>>> ba36221789 (revert: unrewarding abyss)
 
         // Yred worship and death channel aren't stronger than this enchantment
         if (mons.has_ench(ENCH_BOUND_SOUL))
@@ -2390,23 +2384,8 @@ item_def* monster_die(monster& mons, killer_type killer,
             }
         }
 
-<<<<<<< HEAD
         if (!corpse_consumed && coinflip() && _reaping(mons))
             corpse_consumed = true;
-=======
-        corpse_consumed = _apply_necromancy(mons, !death_message, exploded,
-                                            in_los, corpseworthy);
-
-        // currently allowing this to stack with other death effects -hm
-        if (you.duration[DUR_CORPSE_ROT]
-            && in_los
-            && corpseworthy
-            && !have_passive(passive_t::goldify_corpses))
-        {
-            const int rot_pow = you.props[CORPSE_ROT_POWER_KEY].get_int();
-            _corpse_rot(mons, rot_pow);
-        }
->>>>>>> ba36221789 (revert: unrewarding abyss)
     }
 
     if (!wizard && !submerged && !was_banished)
