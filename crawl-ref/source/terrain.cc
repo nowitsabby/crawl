@@ -501,12 +501,15 @@ bool feat_is_diggable(dungeon_feature_type feat)
 /** Is this feature a type of trap?
  *
  *  @param feat the feature.
+ *  @param include_undiscovered whether a trap not yet found counts.
  *  @returns true if it's a trap.
  */
-bool feat_is_trap(dungeon_feature_type feat)
+bool feat_is_trap(dungeon_feature_type feat, bool include_undiscovered)
 {
     if (!is_valid_feature_type(feat))
         return false; // ???
+    if (feat == DNGN_UNDISCOVERED_TRAP)
+        return include_undiscovered;
     return get_feature_def(feat).flags & FFT_TRAP;
 }
 
@@ -1089,7 +1092,7 @@ void dgn_move_entities_at(coord_def src, coord_def dst,
         env.shop.erase(src);
         env.grid(src) = DNGN_FLOOR;
     }
-    else if (feat_is_trap(dfeat))
+    else if (feat_is_trap(dfeat, true))
     {
         ASSERT(trap_at(src));
         env.trap[dst] = env.trap[src];

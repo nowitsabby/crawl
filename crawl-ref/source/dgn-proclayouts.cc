@@ -195,9 +195,8 @@ dungeon_feature_type sanitize_feature(dungeon_feature_type feature, bool strict)
     }
     if (feat_is_stair(feature) || feat_is_sealed(feature))
         return strict ? DNGN_FLOOR : DNGN_STONE_ARCH;
-    if (feat_is_altar(feature) || feat_is_trap(feature))
+    if (feat_is_altar(feature) || feat_is_trap(feature, true))
         return DNGN_FLOOR;
-
     switch (feature)
     {
         case DNGN_SEALED_DOOR:
