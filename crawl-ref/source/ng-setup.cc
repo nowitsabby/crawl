@@ -61,7 +61,7 @@ static void _unfocus_stats()
 }
 
 // Some consumables to make the starts of Sprint a little easier.
-static void _give_bonus_items()
+static void _give_sprint_items()
 {
     newgame_make_item(OBJ_POTIONS, POT_CURING);
     newgame_make_item(OBJ_POTIONS, POT_HEAL_WOUNDS);
@@ -574,7 +574,7 @@ static void _setup_generic(const newgame_def& ng,
     roll_demonspawn_mutations();
 
     if (crawl_state.game_is_sprint())
-        _give_bonus_items();
+        _give_sprint_items();
 
     // Leave the a/b slots open so if the first thing you pick up is a weapon,
     // you can use ' to swap between your items.
