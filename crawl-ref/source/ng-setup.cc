@@ -60,6 +60,12 @@ static void _unfocus_stats()
     }
 }
 
+static void _give_standard_consumables()
+{
+    newgame_make_item(OBJ_POTIONS, POT_CURING);
+    newgame_make_item(OBJ_POTIONS, POT_HEAL_WOUNDS);
+}
+
 // Some consumables to make the starts of Sprint a little easier.
 static void _give_sprint_items()
 {
@@ -572,6 +578,8 @@ static void _setup_generic(const newgame_def& ng,
     give_items_skills(ng);
 
     roll_demonspawn_mutations();
+
+    _give_standard_consumables();
 
     if (crawl_state.game_is_sprint())
         _give_sprint_items();
